@@ -30,7 +30,7 @@ public class PostsControllerTests {
     private PostService postService;
 
     @Test
-    void getAllToDos() throws Exception {
+    void getAllPosts() throws Exception {
         List<Post> postServiceList = new ArrayList<>();
         postServiceList.add(new Post(1,"I love the weather today.", new Date()));
 
