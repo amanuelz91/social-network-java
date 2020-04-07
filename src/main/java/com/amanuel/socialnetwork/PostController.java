@@ -15,7 +15,7 @@ public class PostController {
     private PostService postService;
 
     @GetMapping("/posts")
-    ResponseEntity<List<Post>> getAllToDos() {
+    ResponseEntity<List<Post>> getAllPosts() {
         return new ResponseEntity(postService.findAll(), HttpStatus.OK);
     }
 }
