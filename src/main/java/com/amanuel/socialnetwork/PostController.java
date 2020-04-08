@@ -21,14 +21,11 @@ public class PostController {
 
     @GetMapping("/timeline")
     ResponseEntity<List<Post>> getAllPostsForUser(@RequestParam String userID) {
-//    ResponseEntity<Post> getAllPostsForUser() {
         return new ResponseEntity(postService.findPostsByUserID(userID), HttpStatus.OK);
     }
 
     @PostMapping(path ="/posts",consumes = "application/json", produces = "application/json")
-//    ResponseEntity<Post> create(@RequestBody String text, @RequestBody String userID) {
     ResponseEntity<Post> create(@RequestBody Post post) {
-//        Post post = new Post(text,new Date(),userID);
         return new ResponseEntity(postService.save(post), HttpStatus.CREATED);
     }
 }
