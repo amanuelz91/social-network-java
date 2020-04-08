@@ -3,6 +3,7 @@ package com.amanuel.socialnetwork;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,13 +16,14 @@ import java.util.Optional;
 
 
 @SpringBootTest
-public class PostServiceTest {
+public class PostServiceTests {
     @Autowired
     private PostRepository postRepository;
 
-    @AfterEach
+    @BeforeEach
     void tearDown(){
-        postRepository.deleteAll();
+//        postRepository.deleteAllInBatch();
+//        postRepository.flush();
     }
 
     @Test
@@ -59,12 +61,14 @@ public class PostServiceTest {
         List<Post> resultsList = results.orElseThrow(ChangeSetPersister.NotFoundException::new);
 
         int timelineLength = resultsList.size();
+//        System.out.println("#########################resultsList#########################");
+//        System.out.println(resultsList.get(0).getId());
+//        System.out.println("#########################-----------#########################");
+        // Personal timeline for user 1 should only show user 1's posts
+        Assertions.assertEquals(2,timelineLength);
 
         Post firstResult = resultsList.get(0);
         Post secondResult = resultsList.get(1);
-
-        // Personal timeline for user 1 should only show user 1's posts
-        Assertions.assertEquals(2,timelineLength);
 
         Assertions.assertEquals(postSample1.getText(), firstResult.getText());
         Assertions.assertEquals(postSample1.getDate(), firstResult.getDate());
