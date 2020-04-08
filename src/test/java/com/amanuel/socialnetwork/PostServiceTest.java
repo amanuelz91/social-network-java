@@ -40,7 +40,7 @@ public class PostServiceTest {
     }
 
     @Test
-    void getUserTimelineService() throws ChangeSetPersister.NotFoundException {
+    void getUserTimeline() throws ChangeSetPersister.NotFoundException {
         PostService postService = new PostService(postRepository);
 
         Post postSample1 = new Post(1,"Darn! We lost!",new Date(),"1");
