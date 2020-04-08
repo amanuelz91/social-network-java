@@ -22,8 +22,6 @@ public class PostServiceTests {
 
     @BeforeEach
     void tearDown(){
-//        postRepository.deleteAllInBatch();
-//        postRepository.flush();
     }
 
     @Test
@@ -61,9 +59,7 @@ public class PostServiceTests {
         List<Post> resultsList = results.orElseThrow(ChangeSetPersister.NotFoundException::new);
 
         int timelineLength = resultsList.size();
-//        System.out.println("#########################resultsList#########################");
-//        System.out.println(resultsList.get(0).getId());
-//        System.out.println("#########################-----------#########################");
+
         // Personal timeline for user 1 should only show user 1's posts
         Assertions.assertEquals(2,timelineLength);
 

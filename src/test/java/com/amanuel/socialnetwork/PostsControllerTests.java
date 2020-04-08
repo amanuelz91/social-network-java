@@ -68,9 +68,6 @@ public class PostsControllerTests {
         when(postService.save(any(Post.class))).thenReturn(samplePost);
         ObjectMapper objectMapper = new ObjectMapper();
         String samplePostJSON = objectMapper.writeValueAsString(samplePost);
-//        System.out.println("#####################SamplePostJSON#####################");
-//        System.out.println(samplePostJSON);
-//        System.out.println("#####################---#####################");
         ResultActions result = mockMvc.perform(post("/posts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(samplePostJSON)
