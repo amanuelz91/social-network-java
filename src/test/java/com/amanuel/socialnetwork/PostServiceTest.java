@@ -1,5 +1,6 @@
 package com.amanuel.socialnetwork;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,19 @@ import java.util.Date;
 import java.util.List;
 
 
+
 @SpringBootTest
 public class PostServiceTest {
     @Autowired
     private PostRepository postRepository;
 
+    @AfterEach
+    void tearDown(){
+        postRepository.deleteAll();
+    }
+
     @Test
-    void getAllToDos(){
+    void getAllPosts(){
         Post postSample = new Post(1,"I love the weather today.",new Date());
         postRepository.save(postSample);
         PostService postService = new PostService(postRepository);
@@ -27,11 +34,15 @@ public class PostServiceTest {
         Assertions.assertEquals(postSample.getDate(), firstResult.getDate());
         Assertions.assertEquals(postSample.getId(), firstResult.getId());
 
-//        List<Post> postList = (List<Post>) postService.findAll();
-//        Post lastToDo = postList.get(postList.size()-1);
-//
-//        Assertions.assertEquals(postSample.getId(), lastToDo.getId());
-//        Assertions.assertEquals(postSample.getText(), lastToDo.getText());
-//        Assertions.assertEquals(postSample.getDate(), lastToDo.getDate());
+    }
+
+    @Test
+    void savePost(){
+        PostService postService = new PostService(postRepository);
+        Post postSample = new Post("I love the weather today.",new Date());
+
+        postService.save(postSample);
+
+        Assertions.assertEquals(1.0, postRepository.count());
     }
 }
