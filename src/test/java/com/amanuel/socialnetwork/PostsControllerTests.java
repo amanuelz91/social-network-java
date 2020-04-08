@@ -76,7 +76,7 @@ public class PostsControllerTests {
 
         result.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.userId").value("1"))
+                .andExpect(jsonPath("$.userID").value("1"))
                 .andExpect(jsonPath("$.text").value("I love the weather today."));
     }
 }
