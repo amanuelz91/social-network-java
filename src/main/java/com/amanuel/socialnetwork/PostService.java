@@ -2,8 +2,9 @@ package com.amanuel.socialnetwork;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -19,5 +20,10 @@ public class PostService {
 
     public Post save(Post post) {
         return postRepository.save(post);
+    }
+
+    public Optional<List<Post>> findPostsByUserID(String userID) {
+        Post postSample = new Post("I love the weather today.",new Date(),userID);
+        return  postRepository.findPostsByUserID(userID);
     }
 }
